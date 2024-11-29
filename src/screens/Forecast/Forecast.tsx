@@ -1,9 +1,16 @@
 import React, { useCallback, useState } from 'react';
 import { useStringHandler } from '../../locale';
 import { Button, Header, Input } from '../../components';
-import { ContentContainer, MainContainer, Spinner } from './style';
+import {
+  ContentContainer,
+  KeyboardAvoidingContainer,
+  MainContainer,
+  ScrollContainer,
+  Spinner,
+} from './style';
 import { ForecastError, ForecastResponse, getForecast } from '../../service';
 import { ErrorCard, ForecastCard } from './components';
+import { Keyboard } from 'react-native';
 
 export function Forecast() {
   const { text } = useStringHandler('forecast');
@@ -36,11 +43,11 @@ export function Forecast() {
   }, []);
 
   const attemptFetchForecast = useCallback(async () => {
+    Keyboard.dismiss();
     setIsLoading(true);
     resetScreenStates();
 
     const [err, response] = await getForecast({ location: inputValue });
-
     if (err) {
       setError(err);
       setIsLoading(false);
@@ -58,25 +65,29 @@ export function Forecast() {
   return (
     <>
       <Header title={text('title')} />
-      <MainContainer>
-        <ContentContainer>
-          <Input
-            testID="forecast-input"
-            placeholder={text('inputPlaceholder')}
-            value={inputValue}
-            onChangeText={nextValue => setInputValue(nextValue)}
-          />
-          {forecast && <ForecastCard {...forecast} />}
-          {isLoading && <Spinner testID="forecast-spinner" />}
-          {error && <ErrorCard code={error} />}
-          <Button
-            testID="forecast-button"
-            label={text('search')}
-            onPress={attemptFetchForecast}
-            disabled={isLoading}
-          />
-        </ContentContainer>
-      </MainContainer>
+      <KeyboardAvoidingContainer>
+        <MainContainer>
+          <ScrollContainer>
+            <ContentContainer>
+              <Input
+                testID="forecast-input"
+                placeholder={text('inputPlaceholder')}
+                value={inputValue}
+                onChangeText={nextValue => setInputValue(nextValue)}
+              />
+              {forecast && <ForecastCard {...forecast} />}
+              {isLoading && <Spinner testID="forecast-spinner" />}
+              {error && <ErrorCard code={error} />}
+              <Button
+                testID="forecast-button"
+                label={text('search')}
+                onPress={attemptFetchForecast}
+                disabled={isLoading}
+              />
+            </ContentContainer>
+          </ScrollContainer>
+        </MainContainer>
+      </KeyboardAvoidingContainer>
     </>
   );
 }

@@ -4,10 +4,12 @@ import * as Request from '../../../src/service/getForecast';
 import { Forecast } from '../../../src/screens/Forecast/Forecast';
 import { renderGenericComponent } from '../../utils';
 import { mockResponse } from '../../__mocks__/getForecast.mock';
+import { Keyboard } from 'react-native';
 
 jest.mock('../../../src/service/getForecast');
 describe('Forecast tests', () => {
   const getForecastSpy = jest.spyOn(Request, 'getForecast');
+  const keyboardSpy = jest.spyOn(Keyboard, 'dismiss');
   const renderForecast = () =>
     renderGenericComponent(Forecast, { ...mockResponse });
 
@@ -88,5 +90,20 @@ describe('Forecast tests', () => {
       fireEvent.changeText(input, value);
     });
     expect(input.props.value).toBe(value);
+  });
+
+  it('Should dismiss keyboard when fetching forecast', async () => {
+    getForecastSpy.mockResolvedValue([undefined, mockResponse]);
+    const {
+      component: { getByTestId },
+    } = renderForecast();
+
+    act(() => {
+      fireEvent.press(getByTestId('forecast-button'));
+    });
+
+    await waitFor(() => {
+      expect(keyboardSpy).toHaveBeenCalledTimes(1);
+    });
   });
 });

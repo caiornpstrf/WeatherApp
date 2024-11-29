@@ -1,5 +1,6 @@
 import styled from 'styled-components/native';
 import { StyledText, StyledView } from '../../../../components';
+import { borderRadius, color, compose, space } from 'styled-system';
 
 export const MainContainer = styled(StyledView).attrs({
   mx: '24px',
@@ -16,7 +17,9 @@ export const ErrorIcon = styled(StyledText).attrs({
   px: '32px',
   borderRadius: 16,
   bold: true,
-})``;
+})`
+  ${compose(borderRadius, space, color)}
+`;
 
 export const ErrorText = styled(StyledText).attrs({
   fontSize: 24,
