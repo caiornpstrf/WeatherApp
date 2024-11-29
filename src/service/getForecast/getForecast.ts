@@ -33,7 +33,10 @@ export async function getForecast(
     }
 
     return [undefined, response];
-  } catch (error) {
-    return [error as ForecastError, undefined];
+  } catch {
+    // The API returns error in the response, so we can't reach this point
+    // Anything that goes wrong here is an internal application error
+    // Or a network error
+    return [ForecastError.InternalApplicationError, undefined];
   }
 }

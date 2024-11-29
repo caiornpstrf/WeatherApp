@@ -7,13 +7,13 @@ export type ErrorCardProps = {
   code: ForecastError;
 };
 
-export default function ErrorCard({ code }: ErrorCardProps) {
+export function ErrorCard({ code }: ErrorCardProps) {
   const { text } = useStringHandler('forecast');
   return (
     <MainContainer testID="forecast-error-card">
       <ErrorIcon />
       <ErrorText>
-        {text(`error.${code}`, {}, 'error.9999')}
+        {text(`error.${code}`, undefined, 'error.9999')}
       </ErrorText>
     </MainContainer>
   );

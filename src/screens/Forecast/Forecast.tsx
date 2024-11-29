@@ -3,8 +3,7 @@ import { useStringHandler } from '../../locale';
 import { Button, Header, Input } from '../../components';
 import { ContentContainer, MainContainer, Spinner } from './style';
 import { ForecastError, ForecastResponse, getForecast } from '../../service';
-import { ForecastCard } from './components';
-import ErrorCard from './components/ErrorCard/ErrorCard';
+import { ErrorCard, ForecastCard } from './components';
 
 export function Forecast() {
   const { text } = useStringHandler('forecast');
@@ -71,6 +70,7 @@ export function Forecast() {
           {isLoading && <Spinner testID="forecast-spinner" />}
           {error && <ErrorCard code={error} />}
           <Button
+            testID="forecast-button"
             label={text('search')}
             onPress={attemptFetchForecast}
             disabled={isLoading}
