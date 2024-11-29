@@ -4,12 +4,12 @@ import {
   ConditionIcon,
   HourItemContainer,
   ItemSpacer,
-  Location,
+  Label,
   MainContainer,
   ScrollContainer,
   SectionContainer,
   Temperature,
-  TemperatureContainer,
+  ConditionContainer,
 } from './style';
 import { ForecastResponse } from '../../../../service';
 import { useStringHandler } from '../../../../locale';
@@ -19,7 +19,7 @@ export type ForecastCardProps = ForecastResponse;
 
 export function ForecastCard({
   current: { temp_c, condition },
-  location: { name, country },
+  location: { region, country },
   forecast: {
     forecastday: [{ hour }],
   },
@@ -29,23 +29,26 @@ export function ForecastCard({
   return (
     <MainContainer testID="forecast-card">
       <SectionContainer>
-        <TemperatureContainer>
+        <ConditionContainer>
           <Temperature>
             {text('temperature', { temp_c: Math.round(temp_c) })}
           </Temperature>
-          <Location>
+          <Label>
             {text('location', {
-              name,
+              name: region,
               country,
             })}
-          </Location>
-        </TemperatureContainer>
-        <ConditionIcon
-          source={{
-            // The API doesn't return protocol
-            uri: `https:${condition.icon}`,
-          }}
-        />
+          </Label>
+        </ConditionContainer>
+        <ConditionContainer alignItems="flex-end">
+          <ConditionIcon
+            source={{
+              // The API doesn't return protocol
+              uri: `https:${condition.icon}`,
+            }}
+          />
+          <Label>{condition.text}</Label>
+        </ConditionContainer>
       </SectionContainer>
       <SectionContainer mt="16px">
         <ScrollContainer>

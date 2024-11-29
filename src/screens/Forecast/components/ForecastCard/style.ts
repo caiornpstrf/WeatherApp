@@ -13,7 +13,7 @@ export const SectionContainer = styled(StyledView).attrs({
   justifyContent: 'space-between',
 })``;
 
-export const TemperatureContainer = styled(StyledView)``;
+export const ConditionContainer = styled(StyledView)``;
 
 export const HourItemContainer = styled(StyledView).attrs({
   flexDirection: 'row',
@@ -24,7 +24,7 @@ export const Temperature = styled(StyledText).attrs({
   fontSize: 64,
 })``;
 
-export const Location = styled(StyledText)``;
+export const Label = styled(StyledText)``;
 
 export const ConditionIcon = styled.Image.attrs({
   height: 64,
