@@ -1,6 +1,13 @@
 {
   "forecast": {
     "title": "Forecast",
-    "inputPlaceholder": "Enter city name"
+    "inputPlaceholder": "Enter city name",
+    "search": "Search",
+    "temperature": "{{ temp_c }}°C",
+    "location": "{{ name }}, {{ country }}",
+    "error": {
+      "1006": "City not found.",
+      "9999": "Something went wrong. Please try again later."
+    }
   }
 }

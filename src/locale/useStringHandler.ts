@@ -37,12 +37,16 @@ export function useStringHandler(featureName?: string) {
     return stringWithParams;
   };
 
-  const getFromJson = (key: Key, params?: Params): string => {
+  const getFromJson = (key: Key, params?: Params, fallbackKey?: Key): string => {
     const rawString = get(featureSpecificStrings, key);
     const stringWithParams = params
       ? replaceParams(rawString, params)
       : rawString;
-    return stringWithParams || displayFallback(key);
+    return (
+      stringWithParams ||
+      (fallbackKey && get(featureSpecificStrings, fallbackKey)) ||
+      displayFallback(key)
+    );
   };
 
   return {

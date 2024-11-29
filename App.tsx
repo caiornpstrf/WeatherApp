@@ -9,7 +9,7 @@ function App() {
   return (
     <>
       <StatusBar
-        barStyle={'dark-content'}
+        barStyle={'light-content'}
         backgroundColor={theme.colors.primary}
       />
       <ThemeProvider theme={theme}>

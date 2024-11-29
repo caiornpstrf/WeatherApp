@@ -19,7 +19,7 @@ export const MainContainer = styled(StyledView).attrs({
 })``;
 
 export const Title = styled(StyledText).attrs({
-  color: 'text-dark',
+  color: 'text-light',
   fontSize: 24,
   fontWeight: 'bold',
 })``;
