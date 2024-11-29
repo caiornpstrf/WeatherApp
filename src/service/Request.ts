@@ -1,9 +1,11 @@
+import Config from 'react-native-config';
+
 export type Result<Error, Response> =
   | [Error, undefined]
   | [undefined, Response];
 
 export class Request<RequestResponse> {
-  private baseUrl = '';
+  private baseUrl = Config.API_URL;
 
   private url: string;
   private method: string;
@@ -15,7 +17,7 @@ export class Request<RequestResponse> {
     this.method = 'GET'; // The application only uses GET requests
     this.urlParams = {
       ...urlParams,
-      key: '',
+      key: Config.API_KEY,
     };
     this.headers = {}; // No headers required;
   }
