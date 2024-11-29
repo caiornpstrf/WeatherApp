@@ -1,79 +1,58 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# WeatherApp
 
-# Getting Started
+This is a React Native app that fetches forecast data from an API and renders it in a single screen.
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+# Building the app
 
-## Step 1: Start the Metro Server
+## Step 1: Installing dependencies
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+Run `yarn` to install all the necessary dependencies, then, to correctly install pods, run the following command:
+
+It might be necessary to install to install `ios-deploy` to avoid using XCode to build the app for a Simulator. Just run the following command:
+
+```bash
+brew install ios-deploy
+```
+
+Finally, you must make sure all the pods are installed. So make sure to run the following command:
+
+```bash
+cd ios
+pod install
+cd ..
+```
+
+## Step 2: Start the Metro Server
 
 To start Metro, run the following command from the _root_ of your React Native project:
 
 ```bash
-# using npm
-npm start
-
-# OR using Yarn
 yarn start
 ```
 
-## Step 2: Start your Application
+## Step 3: Start your Application
 
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
-
-### For Android
+Run the appropriate command for the platform
 
 ```bash
-# using npm
-npm run android
-
-# OR using Yarn
 yarn android
-```
-
-### For iOS
-
-```bash
-# using npm
-npm run ios
-
-# OR using Yarn
 yarn ios
 ```
 
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
+# Development notes
 
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
+- Only one endpoint is implemented: `/forecast.json`;
 
-## Step 3: Modifying your App
+- The app doesn't include any implementation for `react-navigation` as it is not necessary.
 
-Now that you have successfully run the app, let's modify it.
+- A `.env` file was provided as an example, the app it totally based on the [weatherapi](https://www.weatherapi.com/docs/). To use the app it is necessary to setup an `API_URL` and `API_KEY`;
 
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
+- The enviroment config is handled by `react-native-config`;
 
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
+- `@testing-library/react-native` was chosen for overall JS tests. I find it to be cleaner than `test-renderer`;
 
-## Congratulations! :tada:
+- `lodash` was added solely to handle strings. Didn't want to setup any localization library to save time. Instead I implemented my own solution, which is `useStringHandler`;
 
-You've successfully run and modified your React Native App. :partying_face:
+- `styled-components` and `styled-system` were picked to save time, since I am more used to developing with it;
 
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+- __Total project time is between 6 to 7 hours__
